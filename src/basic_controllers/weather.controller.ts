@@ -8,8 +8,6 @@ router.get('/', (req: Request, res: Response) => {
 });
 
 router.get('/getweather', (req: Request, res: Response) => {
-    
-    let name: string = req.params.name;
 
     console.log("[INFO] Access by WeatherController with params ", req.params);
 
