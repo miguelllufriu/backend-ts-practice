@@ -20,6 +20,13 @@ export class SocketServer {
 
     private createApp(): void {
         this.app = express();
+        this.app.use(function(req, res, next) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Credentials:false");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
+            next();
+          });
     }
 
     private createServer(): void {
@@ -31,7 +38,7 @@ export class SocketServer {
     }
 
     private sockets(): void {
-        this.ioServer = socketio(this.server);
+        this.ioServer = socketio(this.server, {'origins':'*:*'});
     }
 
     private listen(): void{
